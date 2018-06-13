@@ -17,18 +17,33 @@ class TwitterApi
 
   def most_recent_friend
     #find the twitter gem method that retrieves a user's friends and grab the most recent friend
+    client.friends.first
+    #binding.pry
   end
 
   def find_user_for(username)
     #find the twitter gem method that returns the correct user, given a username
+    client.user(username)
   end
 
   def find_followers_for(username)
     #find the twitter gem method that returns the follows of a given user
+    follower_data = client.followers(username)
+    i = 0
+    followers = []
+    #grab 10 first users with a loop
+    while i < 10
+      #binding.pry
+      followers << follower_data.attrs.first[1][i] #grab each user hash, this is the location
+      i += 1
+    end
+    #binding.pry
+    followers
   end
 
   def homepage_timeline
     #find the twitter gem method that retreives the tweets from a user's timeline.
+    client.home_timeline
   end
   
 end
